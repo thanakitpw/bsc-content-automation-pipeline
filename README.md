@@ -2,7 +2,7 @@
 
 > Multi-business content pipeline plugin สำหรับ Claude Code — รองรับเพจ/ธุรกิจหลายตัว, หลาย business type, มี humanize-writing rules ที่ทำให้บทความ "ฟังเป็นคนไทย" ไม่ใช่ AI
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/thanakitpw/bsc-content-automation-pipeline)
+[![Version](https://img.shields.io/badge/version-1.1.1-blue)](https://github.com/thanakitpw/bsc-content-automation-pipeline)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ## Install
@@ -120,10 +120,13 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 ├── drafts/                           ← work in progress (มี frontmatter)
 │   └── <slug>/
 │       └── YYYY-MM-DD-<topic>.md
-└── final/                            ← ★ พร้อม copy ไปโพสต์
+└── final/                            ← ★ พร้อม copy ไปโพสต์ (folder ต่อ post)
     └── <slug>/
-        ├── 1-<topic>.md
-        ├── 2-<topic>.md
+        ├── 1-<topic>/
+        │   ├── 1-<topic>.md
+        │   └── cover.png (optional)
+        ├── 2-<topic>/
+        │   └── 2-<topic>.md
         └── ...
 ```
 
@@ -161,7 +164,12 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 
 ## Changelog
 
-### v1.1.0 (current)
+### v1.1.1 (current)
+- ★ เปลี่ยน post-formatter เป็น **folder per post** — ใส่ post + cover image ที่เดียวกัน
+- ลบ note ที่บอกให้รัน script (ไม่มี script ในระบบแล้ว)
+- โครงใหม่: `final/<slug>/<N>-<topic>/<N>-<topic>.md`
+
+### v1.1.0
 - ★ เพิ่ม `post-formatter` skill — draft → final/<slug>/N-<topic>.md พร้อม auto-numbering
 - เพิ่ม folder convention `final/` สำหรับโพสต์ที่พร้อม copy
 
