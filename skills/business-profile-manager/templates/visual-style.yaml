@@ -1,0 +1,28 @@
+# Visual Style — สำหรับ image-generator skill (Phase 2 จะใช้ fal.ai nano-banana-pro)
+
+palette:
+  primary: "#000000"               # hex
+  secondary: "#FFFFFF"
+  accent: "#FF6B6B"
+  background: "#FAFAFA"
+
+mood:
+  keywords: []                     # เช่น ["clean", "minimal", "warm", "vibrant"]
+  reference_brands: []             # แบรนด์ที่อ้างอิงสไตล์
+  avoid: []                        # mood/style ที่ไม่ต้องการ
+
+composition:
+  aspect_ratio_preferred: "1:1"    # FB cover ใช้ 1.91:1 / IG ใช้ 1:1 หรือ 4:5
+  subject_focus: ""                # เช่น "สินค้าตรงกลาง", "บุคคลใช้สินค้า"
+  background_style: ""             # "plain" / "lifestyle" / "studio"
+
+photography_style:
+  lighting: ""                     # "soft", "dramatic", "natural"
+  angle: ""                        # "eye-level", "top-down", "low-angle"
+  camera_distance: ""              # "close-up", "medium", "wide"
+
+typography:
+  on_image_text: false             # ใส่ตัวอักษรในรูปไหม
+  font_style: ""                   # ถ้าใส่ — เช่น "modern sans"
+
+forbidden_elements: []             # อะไรที่ห้ามมีในรูป — เช่น "ห้ามมีคนต่างชาติ", "ห้ามมีโลโก้"

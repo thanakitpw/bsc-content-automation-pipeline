@@ -1,0 +1,130 @@
+# Business Profile — bsc-content-pipeline
+# This file is read by content-research and content-writer skills.
+# Edit any field directly or use the business-profile-manager skill.
+
+# === CORE (ทุก type) ===
+slug: "example-business"           # kebab-case, ใช้เป็น folder name
+business_name: ""
+business_type: ""                  # "product" | "creator" | "personal_brand" | "hybrid"
+                                   # ดู references/business-types.md สำหรับคำอธิบาย
+created_at: "YYYY-MM-DD"
+updated_at: "YYYY-MM-DD"
+website: ""
+
+# === IDENTITY ===
+identity:
+  # Common (ทุก type)
+  niche: ""                        # scope แคบของเพจ เช่น "ประวัติศาสตร์ไทยรัตนโกสินทร์", "AI สำหรับ marketer"
+                                   # ★ creator: สำคัญมาก, narrow ดีกว่ากว้าง
+  unique_perspective: ""           # ★ creator: มุมมอง/angle ที่คุณมี vs. คนอื่นในวงการ
+                                   # เช่น "ใช้กรณีศึกษาจริงทุกครั้ง", "เน้นเชื่อมต่อกับวัฒนธรรมไทย"
+
+  # === PRODUCT/SERVICE TYPE FIELDS (ใช้เมื่อ type=product หรือ hybrid) ===
+  products:
+    - name: ""
+      description: ""
+      price_range: ""
+      target_pain: ""              # ปัญหาที่สินค้านี้แก้
+
+  # === CREATOR/EDUCATOR TYPE FIELDS (ใช้เมื่อ type=creator หรือ hybrid) ===
+  topics_covered: []               # หัวข้อหลักที่เพจครอบคลุม เช่น
+                                   # ["พื้นฐาน AI", "use case ในงานจริง", "เทรนด์ AI ในไทย"]
+  expertise_areas: []              # ทักษะ/ความรู้ที่ creator มี
+  content_format_signature: ""     # รูปแบบ content เด่น
+                                   # เช่น "thread ยาว 10 ทวีต", "infographic + caption สั้น", "deep-dive 1500 คำ"
+
+  # === PERSONAL BRAND TYPE FIELDS (ใช้เมื่อ type=personal_brand หรือ hybrid) ===
+  professional_role: ""            # เช่น "Brand Strategist 10 ปี", "หมอผิวหนังคลินิก ABC"
+  professional_journey: ""         # 2-3 ประโยค เล่า journey สั้น
+  credentials: []                  # ปริญญา/certification/ประสบการณ์ที่อ้างได้
+
+# === AUDIENCE (ทุก type) ===
+target_audience:
+  primary:
+    age_range: ""                  # "25-40"
+    gender: ""                     # "หญิง" / "ชาย" / "ทั้งคู่"
+    location: ""
+    interests: []
+    pain_points: []                # (สำหรับ product) ปัญหาที่กลุ่มเป้าหมายเจอ
+    questions_they_ask: []         # ★ (สำหรับ creator) คำถามที่กลุ่มนี้ค้นหา/อยากรู้
+
+  persona_summary: ""              # 1-2 ประโยค
+
+  audience_outcome: ""             # ★ ผู้อ่านได้อะไรจากการติดตาม
+                                   # product: "แก้ pain X ด้วยสินค้า"
+                                   # creator: "เข้าใจ <topic> แบบที่ไม่เคยมีใครอธิบาย"
+                                   # personal_brand: "เข้าถึง insight ระดับมืออาชีพ"
+
+# === VOICE (ทุก type) ===
+voice:
+  tone: ""                         # "กันเอง" / "ทางการ" / "ขายของ" / "วิชาการ" / "ตลก"
+  perspective: ""                  # "ผม" / "ดิฉัน" / "เรา" / "ทีม <ชื่อ>"
+  formality_level: ""              # "casual" / "semi-formal" / "formal"
+  use_emojis: true
+  emoji_style: ""                  # "minimal" / "expressive"
+  sentence_length: ""              # "สั้น" / "กลาง" / "ผสม"
+
+  do:
+    - ""
+  dont:
+    - ""
+
+  signature_phrases: []
+  banned_words: []
+
+# === MONETIZATION (optional, ทุก type) ===
+monetization:
+  models: []                       # ["direct_sales", "course", "affiliate", "sponsorship",
+                                   #  "consulting", "ad_revenue", "patreon", "none"]
+  primary_offer: ""                # offer หลัก เช่น "Course AI 101", "consulting hour", "ครีมสูตร X"
+  promo_frequency: ""              # "ทุกโพสต์" / "1 ใน 5" / "1 ใน 10" / "ตอนเปิดรับ"
+                                   # ★ creator: แนะนำ "1 ใน 5-10" — promo บ่อยทำ engagement ตก
+
+# === CTA PATTERN (per type) ===
+cta:
+  primary_action: ""               # "purchase" / "follow" / "save" / "share" /
+                                   # "comment" / "dm" / "subscribe" / "register"
+  primary_text: ""                 # "ทักแชทมาคุย" / "Save ไว้อ่าน" / "Comment ถ้าเคยเป็น"
+  secondary_text: ""
+  links:
+    line: ""
+    facebook: ""
+    instagram: ""
+    website: ""
+    course_page: ""                # creator/personal_brand
+    affiliate: ""
+
+# === HASHTAGS ===
+hashtags:
+  always: []
+  rotating: []
+
+# === PLATFORMS ===
+platforms:
+  facebook:
+    enabled: true
+    post_length: "medium"
+  instagram:
+    enabled: false
+    caption_length: "short"
+  blog:
+    enabled: false
+    word_count_target: 800
+  line_oa:
+    enabled: false
+  tiktok_caption:
+    enabled: false
+
+# === CONTENT PILLARS ===
+# ค่า default ต่างกันตาม type:
+# - product: Education 50%, Soft Sell 30%, Promo 20%
+# - creator: Education 70%, Story 20%, Promo 10%
+# - personal_brand: Insight 40%, Story 30%, Case 20%, Promo 10%
+content_pillars:
+  - name: ""
+    weight: 0.0
+    description: ""
+
+# === STYLE ANCHORS ===
+# บทความเก่าที่เคยเขียนแล้วชอบ — content-writer อ่านเป็น reference
+style_anchors: []
