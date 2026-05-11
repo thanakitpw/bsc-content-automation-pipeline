@@ -1,7 +1,7 @@
 {
   "name": "bsc-content-pipeline",
-  "version": "1.1.1",
-  "description": "Multi-business content pipeline (Product/Creator/Personal Brand/Hybrid) + humanize-writing rules ภาษาไทย. 4 skills: profile, research, writer, formatter.",
+  "version": "1.2.0",
+  "description": "Multi-business content pipeline (Product/Creator/Personal Brand/Hybrid) + humanize-writing rules ภาษาไทย. 5 skills: profile, research, writer, formatter, planner.",
   "author": {
     "name": "Thanakit Chaithong",
     "email": "agency.bestsolutions@gmail.com"

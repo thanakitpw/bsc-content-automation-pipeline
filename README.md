@@ -2,7 +2,7 @@
 
 > Multi-business content pipeline plugin สำหรับ Claude Code — รองรับเพจ/ธุรกิจหลายตัว, หลาย business type, มี humanize-writing rules ที่ทำให้บทความ "ฟังเป็นคนไทย" ไม่ใช่ AI
 
-[![Version](https://img.shields.io/badge/version-1.1.1-blue)](https://github.com/thanakitpw/bsc-content-automation-pipeline)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue)](https://github.com/thanakitpw/bsc-content-automation-pipeline)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ## Install
@@ -46,7 +46,7 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 
 แต่ละ type มี **คำถามตอนสร้าง profile**, **research strategy**, **structure ของบทความ**, และ **CTA pattern** ต่างกัน
 
-## Skills (4 ตัว)
+## Skills (5 ตัว)
 
 ### 1. business-profile-manager
 
@@ -81,7 +81,7 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 
 **Trigger**: "เขียนบทความ", "เขียนโพสต์", "draft content", "ปรับบทความ"
 
-### 4. post-formatter ★ ใหม่ใน v1.1.0
+### 4. post-formatter
 
 แปลง draft (หลังแก้แล้ว) → ไฟล์ final ที่ **พร้อม copy ไปโพสต์ทันที** มี **auto-numbering ต่อเพจ** (1, 2, 3...) เพื่อจัดเรียงโพสต์ตามลำดับ
 
@@ -91,17 +91,35 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 
 **Trigger**: "เตรียม final", "format โพสต์", "พร้อมโพสต์", "ทำ final"
 
+### 5. content-planner ★ ใหม่ใน v1.2.0
+
+วาง content calendar รายเดือนต่อเพจ — pillar ratio + slot scheduling + backlog (stock topic ที่ research แล้ว) + breaking handling (เพิ่ม slot ใหม่ในวันเดียวกัน ไม่ swap)
+
+- `plan-month` — กำหนด target post count + pillar ratio + posting frequency
+- `plan-week` — assign topic จาก backlog ลง slot
+- `add-breaking` — เพิ่ม breaking content แทรกในวันเดียวกัน (ไม่กระทบ slot เดิม)
+- `view-calendar` — overview เดือนปัจจุบัน + pillar ratio actual vs target
+- `health-check` — เตือน backlog ต่ำ, pillar drift, slot missed
+- `sync-status` — อัปเดต status จาก drafts/, final/ folder
+
+**Trigger**: "วาง plan", "plan เดือนนี้", "ดู calendar", "เพิ่ม breaking", "view plan"
+
 ---
 
 ## Workflow
 
 ```
-1. business-profile-manager  → สร้าง profile (type-aware)
-2. content-research          → เลือก topic (5-10 ตัวเลือก)
-3. content-writer            → ได้ draft ที่ผ่าน humanize check
-4. แก้ draft → "เก็บ style"  → style-notes อัปเดต
-5. post-formatter            → ได้ final/<slug>/N-<topic>.md พร้อม copy
-6. paste ลงเพจจริง
+0. content-planner: plan-month  → กำหนด target + pillar ratio (เดือนละครั้ง)
+1. business-profile-manager     → สร้าง profile (type-aware) — ครั้งเดียวต่อเพจ
+2. content-research             → research → save research file + อาจ append เข้า backlog
+3. content-planner: plan-week   → assign topic จาก backlog ลง slot ของอาทิตย์
+4. content-writer               → draft (ผ่าน humanize check)
+5. แก้ draft → "เก็บ style"     → style-notes อัปเดต
+6. post-formatter               → final/<slug>/<N>-<topic>/ พร้อม copy
+7. paste ลงเพจจริง
+
+★ Breaking workflow (วันที่มีข่าวด่วน):
+   add-breaking → content-research → content-writer → post-formatter → paste
 ```
 
 ## File Structure ที่ระบบสร้าง
@@ -120,14 +138,17 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 ├── drafts/                           ← work in progress (มี frontmatter)
 │   └── <slug>/
 │       └── YYYY-MM-DD-<topic>.md
-└── final/                            ← ★ พร้อม copy ไปโพสต์ (folder ต่อ post)
+├── final/                            ← พร้อม copy ไปโพสต์ (folder ต่อ post)
+│   └── <slug>/
+│       ├── 1-<topic>/
+│       │   ├── 1-<topic>.md
+│       │   └── cover.png (optional)
+│       ├── 2-<topic>/
+│       │   └── 2-<topic>.md
+│       └── ...
+└── plans/                            ← ★ ใหม่ใน v1.2.0 — content calendar
     └── <slug>/
-        ├── 1-<topic>/
-        │   ├── 1-<topic>.md
-        │   └── cover.png (optional)
-        ├── 2-<topic>/
-        │   └── 2-<topic>.md
-        └── ...
+        └── 2026-05.yaml              # 1 ไฟล์ต่อเดือน
 ```
 
 ## ตัวอย่าง use case
@@ -158,13 +179,21 @@ Download `.plugin` file จาก [Releases](https://github.com/thanakitpw/bsc-c
 ## Roadmap
 
 ยังไม่ build:
-- `content-planner` — calendar รายเดือน + content pillars
 - `content-brief` — แยก brief จาก writer
 - `pipeline-runner` — orchestration เช็ค state + flow
+- `meta-publisher` — auto-post via Meta Graph API (Facebook + Instagram) — รอ scale ก่อน
 
 ## Changelog
 
-### v1.1.1 (current)
+### v1.2.0 (current)
+- ★ เพิ่ม `content-planner` skill — content calendar รายเดือน
+- Monthly state file (`plans/<slug>/<YYYY-MM>.yaml`)
+- 6 operations: plan-month, plan-week, add-breaking, view-calendar, health-check, sync-status
+- Breaking content = **เพิ่ม slot ใหม่** ในวันเดียวกัน ไม่ swap ของเดิม
+- Backlog ใน plan.yaml — stock ของ topic ที่ research แล้ว
+- pillar ratio tracking + drift info (ไม่ block)
+
+### v1.1.1
 - ★ เปลี่ยน post-formatter เป็น **folder per post** — ใส่ post + cover image ที่เดียวกัน
 - ลบ note ที่บอกให้รัน script (ไม่มี script ในระบบแล้ว)
 - โครงใหม่: `final/<slug>/<N>-<topic>/<N>-<topic>.md`
